@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/auth.css">
+    <title>Document</title>
+</head>
+<body>
+    <!-- HEADER -->
+    <div id="header">
+    <script>
+        load("header.html");
+        function load(url) {
+            const request = new XMLHttpRequest();
+            request.open("GET", url, false);
+            request.onload = function () {
+                if (request.status >= 200 && request.status < 400) {
+                    document.getElementById("header").innerHTML = request.responseText;
+                }
+            };
+            request.send();
+        }
+    </script>
+</div>
+    <div id="loginForm">
+        <h2>Login</h2>
+        <form id="form">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">Login</button>
+        </form>
+        <p>Don't have an account? <a href="signup.html">Sign up</a></p>
+    </div>
+     <!-- FOOTER -->
+     <div id="4">
+     <script>
+         load("footer.html");
+         function load(url)
+         {
+             req = new XMLHttpRequest();
+             req.open("GET", url, false);
+             req.send(null);
+             document.getElementById(4).innerHTML = req.responseText;
+         }
+     </script>
+    </div>
+
+    <script>
+        const form = document.getElementById('form');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            const loginData = {
+                email,
+                password,
+            };
+
+            try {
+                const response = await fetch('http://localhost:3000/api/user/signin', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(loginData),
+                });
+
+                if (response.ok) {
+                    alert('Login successful');
+                    window.location.href = 'index.html';
+                } else {
+                    const errorData = await response.json();
+                    throw new Error(errorData.message);
+                }
+            } catch (error) {
+                console.error(error);
+                alert('Login failed');
+            }
+        });
+    </script>
+
+</body>
+</html>

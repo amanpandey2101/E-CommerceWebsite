@@ -1,0 +1,76 @@
+/* CSS styles for login and signup pages */
+
+#signupForm {
+    width: 300px;
+    margin: auto;
+    position: relative;
+    display: block;
+    top:12vh;
+    padding: 30px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+#loginForm{
+    width: 300px;
+    margin: auto;
+    margin-bottom: 15vh;
+    position: relative;
+    display: block;
+    top:12vh;
+    padding: 30px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+#loginForm h2,
+#signupForm h2 {
+    text-align: center;
+}
+
+#loginForm form,
+#signupForm form {
+    margin-top: 20px;
+}
+
+#loginForm label,
+#signupForm label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#loginForm input[type="email"],
+#signupForm input[type="email"],
+#loginForm input[type="password"],
+#signupForm input[type="password"],
+#loginForm input[type="text"],
+#signupForm input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+#loginForm button,
+#signupForm button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+#loginForm button:hover,
+#signupForm button:hover {
+    background-color: #45a049;
+}
+
+#loginForm p,
+#signupForm p {
+    text-align: center;
+    margin-top: 10px;
+}

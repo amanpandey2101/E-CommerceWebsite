@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/auth.css">
+    <title>Document</title>
+</head>
+<body>
+ <!-- HEADER -->
+        <div id="header">
+            <script>
+                load("header.html");
+                function load(url) {
+                    const request = new XMLHttpRequest();
+                    request.open("GET", url, false);
+                    request.onload = function () {
+                        if (request.status >= 200 && request.status < 400) {
+                            document.getElementById("header").innerHTML = request.responseText;
+                        }
+                    };
+                    request.send();
+                }
+            </script>
+        </div>
+    <div id="signupForm">
+        <h2>Signup</h2>
+        <form id="form">
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" required><br>
+
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" required><br>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" required><br>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" required><br>
+
+            <label for="role">Role:</label>
+            <input type="radio" id="admin" name="role" value="admin" required>
+            <label for="admin">Admin</label>
+            <input type="radio" id="user" name="role" value="user" required>
+            <label for="user">User</label><br>
+
+            <button type="submit">Signup</button>
+        </form>
+        <p>Already have an account? <a href="login.html">Login</a></p>
+    </div>
+        
+    <script>
+        const form = document.getElementById('form');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const role = document.querySelector('input[name="role"]:checked').value;
+
+            const userData = {
+                firstName,
+                lastName,
+                email,
+                password,
+                role,
+            };
+
+            try {
+                const response = await fetch('http://localhost:3000/api/user/signup', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(userData),
+                });
+
+                if (response.ok) {
+                    alert('User created successfully');
+                    window.location.href = 'login.html';
+                } else {
+                    const errorData = await response.json();
+                    throw new Error(errorData.message);
+                }
+            } catch (error) {
+                console.error(error);
+                alert('Signup failed');
+            }
+        });
+    </script>
+</body>
+</html>
